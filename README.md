@@ -28,6 +28,8 @@ A Django REST with Simple JWT implementation helper in Flutter
   - Credential with jwt token options
 - Repository (Abstract classes)
   - Auth
+- Utils
+  - Storage (abstract class)
 
 ## Getting started
 

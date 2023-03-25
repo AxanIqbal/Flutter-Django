@@ -1,3 +1,6 @@
+## 1.1.2
+- Invalid token checks
+
 ## 1.1.1
 - change Connection Error to Built-in `DioErrorType.connectionError`
 

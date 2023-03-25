@@ -17,19 +17,32 @@ class Credential with _$Credential {
   factory Credential.fromJson(Map<String, dynamic> json) =>
       _$CredentialFromJson(json);
 
+  /// If refresh token has ability to refresh
   bool canRefresh() {
-    return !JwtDecoder.isExpired(refreshToken);
+    try {
+      return !JwtDecoder.isExpired(refreshToken);
+    } on FormatException {
+      // if token is Invalid with HTTPONLY or any other reason
+      return false;
+    }
   }
 
+  /// If access token expires
   bool isExpired() {
     if (accessToken != null) {
-      return JwtDecoder.getRemainingTime(accessToken!) <
-          const Duration(minutes: 1);
+      try {
+        return JwtDecoder.getRemainingTime(accessToken!) <
+            const Duration(minutes: 1);
+      } on FormatException {
+        // if token is Invalid with any reason
+        return true;
+      }
     } else {
       return true;
     }
   }
 
+  /// Check the remaining time of access token if has any
   Duration? checkRemainTime() {
     if (accessToken != null) {
       return JwtDecoder.getRemainingTime(accessToken!);

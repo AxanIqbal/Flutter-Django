@@ -5,6 +5,7 @@ extension DioErrorX on DioError {
     return type == DioErrorType.connectionError;
   }
 
+  /// Django known server error handling
   String get serverErrorOrConnection {
     if (isNoConnectionError) return "No Internet Connection";
     if (response == null) return "No data were provided from server";
